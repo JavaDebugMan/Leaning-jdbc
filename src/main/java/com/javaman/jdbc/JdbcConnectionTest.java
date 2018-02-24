@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 /**
@@ -55,6 +53,24 @@ public class JdbcConnectionTest {
     public void test2() throws ClassNotFoundException, SQLException, InstantiationException, IOException, IllegalAccessException {
         Connection connection = getConnection();
         System.out.println(connection);
+    }
+
+    @Test
+    public void test() throws ClassNotFoundException, SQLException, InstantiationException, IOException, IllegalAccessException {
+        //获取数据库连接
+        Connection connection = getConnection();
+        //sql
+        String sql = "INSERT INTO user (name, age, email) VALUES ('asdsafafa','122','12412414@qq.com')";
+        String sql2 = "SELECT * FROM user";
+        //获取Statement对象
+        Statement statement = connection.createStatement();
+        int i = statement.executeUpdate(sql);
+        ResultSet resultSet = statement.executeQuery(sql2);
+        statement.close();
+        System.out.println(resultSet);
+        System.out.println(i);
+        connection.close();
+
     }
 
 
