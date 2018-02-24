@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,8 +58,33 @@ public class MybatisTest {
         System.out.println(list);
 
 
-
     }
 
+    @Test
+    public void test3() throws IOException {
+        String resource = "SqlMapConfig.xml";
+
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+
+        //创建回话工厂
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //通过工厂得到sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        User user = new User();
+        user.setAddress("guangdgong");
+        user.setSex("23");
+        user.setBirthday(new Date());
+        user.setUsername("343423423");
+        sqlSession.insert("test.insertUser", user);
+        sqlSession.commit();
+
+        //获取自增主键
+
+        System.out.println(user.getId());
+        sqlSession.close();
+
+    }
 
 }

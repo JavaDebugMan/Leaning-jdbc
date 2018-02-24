@@ -15,8 +15,11 @@
     <select id="findUserByUserName" parameterType="java.lang.String" resultType="com.javaman.mybatis.User">
         SELECT * FROM user WHERE username LIKE '%${value}%'
     </select>
-
-    <insert id="">
-
+    <!--#{id} 中指定pojo的属性名,接收到pojo对象的属性值,mybatis通过OGNL-->
+    <insert id="insertUser" parameterType="com.javaman.mybatis.User">
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user ( username, birthday, sex, address) VALUES (#{username},#{birthday},#{sex},#{address})
     </insert>
 </mapper>
