@@ -87,4 +87,49 @@ public class MybatisTest {
 
     }
 
+    @Test
+    public void test4() throws IOException {
+        String resource = "SqlMapConfig.xml";
+
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+
+        //创建回话工厂
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //通过工厂得到sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        sqlSession.delete("test.deleteUserById", 24);
+
+        sqlSession.commit();
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void test5() throws IOException {
+        String resource = "SqlMapConfig.xml";
+
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+
+        //创建回话工厂
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //通过工厂得到sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        User user = new User();
+
+        user.setId(22);
+        user.setUsername("weidadezhege");
+        user.setBirthday(new Date());
+        user.setAddress("foshan");
+        user.setSex("2");
+        sqlSession.update("test.updateUser", user);
+
+        sqlSession.commit();
+
+        sqlSession.close();
+    }
+
 }

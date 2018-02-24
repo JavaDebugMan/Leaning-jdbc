@@ -22,4 +22,12 @@
         </selectKey>
         INSERT INTO user ( username, birthday, sex, address) VALUES (#{username},#{birthday},#{sex},#{address})
     </insert>
+
+    <delete id="deleteUserById" parameterType="int">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.javaman.mybatis.User">
+        UPDATE user SET username=#{username}, birthday=#{birthday}, sex=#{sex}, address=#{address} WHERE id=#{id}
+    </update>
 </mapper>
