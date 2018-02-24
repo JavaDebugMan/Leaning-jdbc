@@ -34,10 +34,13 @@ public class DriverManagerTest {
         Class.forName(driverClass);
         //DriverManager.getConnection获取数据库连接
         Connection connection = DriverManager.getConnection(jdbcUrl, user, password);
+        Connection connection2 = DriverManager.getConnection(jdbcUrl, user, password);
         boolean autoCommit = connection.getAutoCommit();
         int transactionIsolation = connection.getTransactionIsolation();
         System.out.println(autoCommit);
-        System.out.println(connection);
+        System.out.println(transactionIsolation);
+        System.out.println("connection1====="+connection);
+        System.out.println("connection2====="+connection2);
 
     }
 
