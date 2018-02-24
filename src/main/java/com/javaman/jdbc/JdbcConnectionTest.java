@@ -66,6 +66,7 @@ public class JdbcConnectionTest {
         Statement statement = connection.createStatement();
         int i = statement.executeUpdate(sql);
         ResultSet resultSet = statement.executeQuery(sql2);
+
         statement.close();
         System.out.println(resultSet);
         System.out.println(i);
