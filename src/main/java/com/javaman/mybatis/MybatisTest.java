@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author pengzhe
@@ -30,11 +31,32 @@ public class MybatisTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         //操作数据库
-       User user= sqlSession.selectOne("test.findUserById", 18);
+        User user = sqlSession.selectOne("test.findUserById", 18);
 
         System.out.println(user);
 
         sqlSession.close();
+
+    }
+
+    @Test
+    public void test2() throws IOException {
+
+        String resource = "SqlMapConfig.xml";
+
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+
+        //创建回话工厂
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //通过工厂得到sqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        List<User> list = sqlSession.selectList("test.findUserByUserName", "peng");
+
+        System.out.println(list);
+
+
 
     }
 
